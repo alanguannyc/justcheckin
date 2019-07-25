@@ -13,7 +13,7 @@ export default class EventView extends Component{
           { title: 'Company', field: 'company' },
           { title: 'Title', field: 'title' },
           { title: 'Date ', field: 'time', type: 'date' },
-         
+          { title: 'Notes ', field: 'note'},
         ],
         data: [
         ]
@@ -43,6 +43,21 @@ export default class EventView extends Component{
             this.updateAttendeeList()
         })
     }
+
+    deleteAttendee = (oldData) => {
+
+        axios.delete('/api/attendee/' + oldData.id)
+        .then(resp =>{
+            this.updateAttendeeList()
+        })
+    }
+
+    updateAttendee = (newData, oldData) => {
+        axios.post('/api/attendee/' + oldData.id + '/edit', newData)
+        .then(resp =>{
+            this.updateAttendeeList()
+        })
+    }
   
     render() {
       return (
@@ -51,34 +66,35 @@ export default class EventView extends Component{
           columns={this.state.columns}
           data={this.state.data}
           options={{
-            exportButton: true
+            exportButton: true,
+            pageSize: 10,
           }}
-          editable={{
-            onRowAdd: this.addAttendee,
+          editable={{ 
+            onRowAdd: newData => new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            }).then(this.addAttendee(newData)),
+            
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  {
-                    const data = this.state.data;
-                    const index = data.indexOf(oldData);
-                    data[index] = newData;
-                    this.setState({ data }, () => resolve());
-                  }
-                  resolve()
+                  resolve("success")
                 }, 1000)
-              }),
+              }).then( resp=>{
+                this.updateAttendee(newData, oldData)
+              }
+                  
+              ),
+
             onRowDelete: oldData =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  {
-                    let data = this.state.data;
-                    const index = data.indexOf(oldData);
-                    data.splice(index, 1);
-                    this.setState({ data }, () => resolve());
-                  }
                   resolve()
                 }, 1000)
-              }),
+              }).then(
+                  this.deleteAttendee(oldData)
+              ),
           }}
         />
       )

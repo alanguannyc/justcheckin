@@ -31,6 +31,7 @@
         "history": "^4.9.0",
         "material-table": "^1.40.1",
         "material-ui-icons": "^1.0.0-beta.36",
+        "moment": "^2.24.0",
         "react-router-dom": "^5.0.1"
     }
 }

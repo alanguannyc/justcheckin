@@ -1,6 +1,6 @@
-import React, { Component }  from 'react';
+import React, { Component, useRef }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper,Table, TableBody, TableCell, TableHead, TableRow, Fab} from '@material-ui/core';
+import {Paper,Table, TableBody, TableCell, TableHead, TableRow, Fab, CircularProgress} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';
@@ -11,22 +11,29 @@ import ConfirmDialog from './ConfirmationDialog.js';
 import EditEvent from './EditEvent'
 
 
+
 class EventsDashboard extends Component {
 
     constructor(props) {
       super(props);
       this.child = React.createRef();
+      this.childRef = React.createRef();
       this.state = {
         data: [],
         editing:false,
-        eventData:'',
-        openDialog:false,
+        selectedEvent:'',
+        askForConfirmation:false,
         confirmed:false,
+        isLoading:false
       }
     }
 
+
+
     componentDidMount() {
+
       this.updateEventList()
+      
     }
    
 
@@ -41,17 +48,13 @@ class EventsDashboard extends Component {
       })
     }
 
-    handleSelection = (rows)=>{
-
-    }
-
     handleDelete = (evt, data) => {
-        const eventID = data[0].id
-        Axios.delete('/api/event/' + eventID)
-        .then(resp => {
-          this.updateEventList()
-          this.setState({confirmed: false})
+      
+        this.setState({
+          selectedEvent: data[0]
         })
+        this.childRef.current.handleClickOpen()
+        
     }
 
     handleUpdate = (evt, data) => {
@@ -60,7 +63,6 @@ class EventsDashboard extends Component {
         eventData: data[0],
         editing: true
       })
-      // this.child.current.getEventDetail();
       const eventID = data[0].id
       
   }
@@ -81,9 +83,18 @@ class EventsDashboard extends Component {
       
     }
 
-    onOpenConfirmation = () => {
-
-      this.setState({openDialog: false, confirmed: true})
+    onDeleteConfirmation = () => {
+      this.setState({
+        isLoading:true
+      })
+      setTimeout(()=>{
+        Axios.delete('/api/event/' + this.state.selectedEvent.id)
+        .then(resp => {
+          this.updateEventList()
+          this.setState({isLoading: false})
+        })
+    }, 500)
+      
 
     }
 
@@ -92,24 +103,51 @@ class EventsDashboard extends Component {
     }
 
     render(){
+      
+        const progressStyle = {
+         
+            'position': 'absolute',
+            'zIndex':'999',
+            'margin':'auto',
+            'left': '50%',
+            'top': '50%',
+          
+        }
         return (
           <div>
             <Paper >
-            <ConfirmDialog onOpen={this.state.openDialog} onComfirmation={this.onOpenConfirmation} onCancel={this.onCancelConfirmation}/>
+            {this.state.isLoading ? <CircularProgress style={progressStyle} /> : <div></div>}
+            
+            <ConfirmDialog ref={this.childRef} onComfirmation={this.onDeleteConfirmation} onCancel={this.onCancelConfirmation}/>
               <MaterialTable
               title="HANYC Events"
               columns={[
                 { title: 'Name', field: 'name', 
                 render: rowData => <Link to={'/event/' + rowData.id + '/attendees'} style={{width: 40, borderRadius: '50%'}}> {rowData.name} </Link> },
 
-                { title: 'Date', field: 'fromDate' },
-                { title: 'RSVP', field: 'numberOfRSVP' },
+                { title: 'Date', field: 'fromDate',
+                render: rowData => {
+                  var fromDate = rowData.fromDate.split("T")
+                  var toDate = rowData.toDate.split("T")
+                  if(fromDate[0] == toDate[0]){
+                    return <div> {rowData.fromDate.split("T").join(" ") + " - "+ toDate[1]} </div> 
+                  } else {
+                    return <div> {rowData.fromDate.split("T").join(" ") + " - "+ toDate.join(" ")} </div> 
+                  }
+                }
+                
+                
+              },
+            
+                { title: 'RSVP', field: 'attendees',
+                render: rowData => <div>{rowData.attendees.length}</div> },
 
               ]}
-              data={this.state.data}  
+              data={this.state.data}
               options={{
                 selection: true,
-                sorting: true
+                sorting: true,
+                pageSize: 10,
 
               }}
               actions={[

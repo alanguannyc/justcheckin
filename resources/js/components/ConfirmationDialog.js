@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { forwardRef, useRef, useImperativeHandle } from 'react';
+
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,12 +8,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function ConfirmationDiaglog({onComfirmation, onOpen, onCancel}) {
+const ConfirmationDiaglog = forwardRef((props, ref) => {
   const [open, setOpen] = React.useState(false);
 
-  useEffect(() => {
-    setOpen(onOpen)
-  });
+  
 
   function handleClickOpen() {
     setOpen(true);
@@ -20,7 +20,7 @@ export default function ConfirmationDiaglog({onComfirmation, onOpen, onCancel}) 
   
 
   function handleConfirmation() {
-    onComfirmation()
+    props.onComfirmation()
     handleClose()
   }
 
@@ -32,12 +32,20 @@ export default function ConfirmationDiaglog({onComfirmation, onOpen, onCancel}) 
   function handleClose() {
     setOpen(false);
   }
+  useImperativeHandle(ref, () => ({
+
+    handleClickOpen() {
+      setOpen(true);
+    }
+  
+
+  }));
 
   return (
     <div>
       <Dialog
-        open={onOpen}
-        onClose={onCancel}
+        open={open}
+        onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -51,7 +59,7 @@ export default function ConfirmationDiaglog({onComfirmation, onOpen, onCancel}) 
           <Button onClick={handleConfirmation} color="primary">
             Confirm
           </Button>
-          <Button onClick={onCancel} color="primary" autoFocus>
+          <Button onClick={handleClose} color="primary" autoFocus>
             Cancel
           </Button>
         </DialogActions>
@@ -59,3 +67,6 @@ export default function ConfirmationDiaglog({onComfirmation, onOpen, onCancel}) 
     </div>
   );
 }
+)
+
+export default ConfirmationDiaglog

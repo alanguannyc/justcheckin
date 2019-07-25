@@ -14,7 +14,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = \App\Event::all();
+        $events = \App\Event::with('attendees')->get();
         return $events;
     }
 

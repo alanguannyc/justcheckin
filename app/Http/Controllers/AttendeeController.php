@@ -70,9 +70,11 @@ class AttendeeController extends Controller
      * @param  \App\Attendee  $attendee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attendee $attendee)
+    public function update(Request $request, $id)
     {
-        //
+        $attendee = Attendee::findOrFail($id);
+        $attendee->update($request->all());
+        return $attendee;
     }
 
     /**
@@ -81,8 +83,9 @@ class AttendeeController extends Controller
      * @param  \App\Attendee  $attendee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attendee $attendee)
+    public function destroy(Attendee $attendee, $id)
     {
-        //
+        \App\Attendee::destroy($id);
+
     }
 }

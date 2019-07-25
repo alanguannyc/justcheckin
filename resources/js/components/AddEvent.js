@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText,
 DialogTitle} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import moment from 'moment';
 
 
 
@@ -13,9 +14,20 @@ export default class AddEvent extends Component {
     this.state = {
         open: false,
         name: '',
-        fromDate:'2019-05-24T10:30',
-        toDate:'2019-05-24T11:30',
+        fromDate:moment().format("YYYY-MM-DDTHH:mm"),
+        toDate:moment().add(1, 'h').format("YYYY-MM-DDTHH:mm")
     };
+  }
+
+  componentDidMount() {
+    const currentDateTime = new Date()
+    const toDateTime = new Date()
+    toDateTime.setHours(currentDateTime.getHours() + 2)
+    this.setState({
+      // fromDate: currentDateTime.toISOString().split('.')[0],
+      // toDate: toDateTime.toISOString().split('.')[0]
+    })
+
   }
 
   handleOpen = () => {
@@ -71,10 +83,11 @@ export default class AddEvent extends Component {
           />
           
           <TextField
+          style={{'width':'50%'}}
             id="fromdatetime-local"
             label="From"
             type="datetime-local"
-
+            format="DD-MM-YYYY"
             value={this.state.fromDate}
             onChange={this.handleChange.bind(this, "fromDate")}
             InputLabelProps={{
@@ -82,10 +95,11 @@ export default class AddEvent extends Component {
             }}
         />
           <TextField
+          style={{'width':'50%'}}
             id="todatetime-local"
             label="To"
             type="datetime-local"
-
+            format="yyyy-MM-ddThh:mm"
             value={this.state.toDate}
             onChange={this.handleChange.bind(this, "toDate")}
             InputLabelProps={{

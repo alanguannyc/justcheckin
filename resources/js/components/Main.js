@@ -7,7 +7,7 @@ import Routes from './Routes';
 const browserHistory = createBrowserHistory({basename: '/'});
 
 
-export default class Example extends Component {
+export default class Main extends Component {
     render() {
         return (
             <Router history={browserHistory} >
@@ -18,5 +18,5 @@ export default class Example extends Component {
 }
 
 if (document.getElementById('main')) {
-    ReactDOM.render(<Example />, document.getElementById('main'));
+    ReactDOM.render(<Main />, document.getElementById('main'));
 }
