@@ -16,8 +16,8 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->timestamp('fromDate')->nullable();
-            $table->timestamp('toDate')->nullable();
+            $table->text('fromDate')->nullable();
+            $table->text('toDate')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event');
+        Schema::dropIfExists('events');
     }
 }

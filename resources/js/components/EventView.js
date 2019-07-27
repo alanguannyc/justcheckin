@@ -12,7 +12,7 @@ export default class EventView extends Component{
           { title: 'Last Name', field: 'lastName' },
           { title: 'Company', field: 'company' },
           { title: 'Title', field: 'title' },
-          { title: 'Date ', field: 'time', type: 'date' },
+          { title: 'Date ', field: 'created_at', type: 'date',editable: 'never' },
           { title: 'Notes ', field: 'note'},
         ],
         data: [
@@ -22,7 +22,7 @@ export default class EventView extends Component{
 
     componentDidMount(){
         this.updateAttendeeList()
-        
+
 
     }
 
@@ -58,7 +58,7 @@ export default class EventView extends Component{
             this.updateAttendeeList()
         })
     }
-  
+
     render() {
       return (
         <MaterialTable
@@ -69,13 +69,13 @@ export default class EventView extends Component{
             exportButton: true,
             pageSize: 10,
           }}
-          editable={{ 
+          editable={{
             onRowAdd: newData => new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve();
                 }, 1000);
             }).then(this.addAttendee(newData)),
-            
+
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -84,7 +84,7 @@ export default class EventView extends Component{
               }).then( resp=>{
                 this.updateAttendee(newData, oldData)
               }
-                  
+
               ),
 
             onRowDelete: oldData =>
