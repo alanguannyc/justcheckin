@@ -20,10 +20,14 @@ export default class EventView extends Component{
           { title: 'Last Name', field: 'lastName' },
           { title: 'Company', field: 'company' },
           { title: 'Title', field: 'title' },
+<<<<<<< HEAD
           { title: 'Email', field: 'email' },
           { title: 'Checked in', field: 'checkin',
           render: rowData => {return rowData.checkin? <p>YES</p> : <p>NO</p>}}, 
           { title: 'Date ', field: 'time', type: 'date' },
+=======
+          { title: 'Date ', field: 'created_at', type: 'date',editable: 'never' },
+>>>>>>> 856ee87e948d35fa0aa8bbb1f60167cdcdeb6749
           { title: 'Notes ', field: 'note'},
         ],
         data: [
@@ -33,7 +37,7 @@ export default class EventView extends Component{
 
     componentDidMount(){
         this.updateAttendeeList()
-        
+
 
     }
 
@@ -70,6 +74,7 @@ export default class EventView extends Component{
         })
     }
 
+<<<<<<< HEAD
     uploadAttendees(data){
       axios.post('/api/event/' + this.props.match.params.id + '/bulk', data)
       .then(resp =>{
@@ -129,6 +134,8 @@ export default class EventView extends Component{
       
     }
   
+=======
+>>>>>>> 856ee87e948d35fa0aa8bbb1f60167cdcdeb6749
     render() {
       return (
         <div style={{'margin':'5px 20px'}}>
@@ -141,15 +148,19 @@ export default class EventView extends Component{
             exportButton: true,
             pageSize: 10,
           }}
+<<<<<<< HEAD
 
           
           editable={{ 
+=======
+          editable={{
+>>>>>>> 856ee87e948d35fa0aa8bbb1f60167cdcdeb6749
             onRowAdd: newData => new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve();
                 }, 1000);
             }).then(this.addAttendee(newData)),
-            
+
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -158,7 +169,7 @@ export default class EventView extends Component{
               }).then( resp=>{
                 this.updateAttendee(newData, oldData)
               }
-                  
+
               ),
 
             onRowDelete: oldData =>
