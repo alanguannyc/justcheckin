@@ -36,7 +36,7 @@ class AttendeeController extends Controller
      */
     public function store(Request $request)
     {
-        $attendee = new Attendee(request(['firstName','lastName','company','title','phone','note','event_id', 'email', 'checkin','checkedin_at']));
+        $attendee = new Attendee(request(['firstName','lastName','company','title','phone','note','event_id', 'email','checkin','checkedin_at']));
 
         $attendee->save();
     }
