@@ -23,9 +23,9 @@ class AttendeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -36,9 +36,9 @@ class AttendeeController extends Controller
      */
     public function store(Request $request)
     {
-        $event = new Attendee(request(['firstName','lastName','company','title','phone','note','event_id']));
+        $attendee = new Attendee(request(['firstName','lastName','company','title','phone','note','event_id', 'email', 'checkin','checkedin_at']));
 
-        $event->save();
+        $attendee->save();
     }
 
     /**
@@ -76,6 +76,9 @@ class AttendeeController extends Controller
         $attendee->update($request->all());
         return $attendee;
     }
+
+   
+
 
     /**
      * Remove the specified resource from storage.

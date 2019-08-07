@@ -3,10 +3,11 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import EventsDashboard from './EventsDashboard';
 import EventView from './EventView';
+import CheckIn from './CheckIn';
 
 export default class Routes extends Component {
   render() {
-    const UsersPage = () => <div>Users Page</div>
+
     return (
       <Switch >
         <Redirect
@@ -24,6 +25,10 @@ export default class Routes extends Component {
         <Route
           component={EventView}
           path='/event/:id/attendees'
+        />
+        <Route
+          component={CheckIn}
+          path='/event/:id/checkin'
         />
         {/*
         

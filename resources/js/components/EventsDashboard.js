@@ -1,4 +1,6 @@
 import React, { Component, useRef }  from 'react';
+import { withRouter } from "react-router-dom";
+
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper,Table, TableBody, TableCell, TableHead, TableRow, Fab, CircularProgress} from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -10,7 +12,7 @@ import Axios from 'axios';
 import ConfirmDialog from './ConfirmationDialog.js';
 import EditEvent from './EditEvent'
 
-
+import { createBrowserHistory } from 'history';
 
 class EventsDashboard extends Component {
 
@@ -114,9 +116,9 @@ class EventsDashboard extends Component {
           
         }
         return (
-          <div>
+          <div style={{'margin':'20px'}}>
             <Paper >
-            {this.state.isLoading ? <CircularProgress style={progressStyle} /> : <div></div>}
+            {this.state.isLoading ? <CircularProgress className="progress-indicator" /> : <div></div>}
             
             <ConfirmDialog ref={this.childRef} onComfirmation={this.onDeleteConfirmation} onCancel={this.onCancelConfirmation}/>
               <MaterialTable
@@ -160,6 +162,11 @@ class EventsDashboard extends Component {
                   tooltip: 'Edit selected event',
                   icon: 'edit',
                   onClick: this.handleUpdate
+                },
+                {
+                  tooltip: 'Check in selected event',
+                  icon: 'check_circle_outline',
+                  onClick: (evt, data) => this.props.history.push('/event/' + data[0].id + '/checkin')
                 }
               ]}
               onSelectionChange={this.handleSelection}

@@ -23,9 +23,22 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function bulk(Request $request, $id)
     {
-        //
+        $event = Event::find($id);
+        
+        $event->attendees()->insert($request->all());
+
+        return $event->attendees();
+    }
+
+    public function removeAll(Request $request, $id)
+    {
+        $event = Event::find($id);
+        
+        $event->attendees()->delete();
+
+        return $event;
     }
 
     /**

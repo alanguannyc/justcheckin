@@ -28,10 +28,14 @@ Route::post('/events', 'EventController@store');
 Route::get('/event/{id}', 'EventController@show');
 Route::post('/event/{id}/edit', 'EventController@update');
 Route::delete('/event/{id}', 'EventController@destroy');
-
+Route::post('/event/{id}/bulk', 'EventController@bulk');
+Route::delete('/event/{id}/bulk', 'EventController@removeAll');
 
 Route::get('/attendees', 'AttendeeController@index');
 Route::post('/attendees', 'AttendeeController@store');
 Route::get('/attendee/{id}', 'AttendeeController@show');
 Route::post('/attendee/{id}/edit', 'AttendeeController@update');
 Route::delete('/attendee/{id}', 'AttendeeController@destroy');
+
+
+Route::get('/event/{id}/checkin', 'CheckInController@attendees');

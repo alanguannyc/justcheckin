@@ -1,5 +1,117 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+.progress-indicator {
+  position: absolute;
+  z-Index: 999;
+  margin: auto;
+  left: 49.3%;
+  top: 50%;
+}
+
+.checkin-button {
+  width: 440px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.react-autosuggest__container {
+  position: relative;
+  margin: auto;
+  width: 440px;
+}
+
+.react-autosuggest__input {
+  width: 440px;
+  height: 30px;
+  padding: 10px 20px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.react-autosuggest__input:focus {
+  outline: none;
+}
+
+.react-autosuggest__container--open .react-autosuggest__input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+  width: 440px;
+}
+
+.react-autosuggest__container--open .react-autosuggest__suggestions-container {
+  display: block;
+  position: absolute;
+  width: 100%;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.react-autosuggest__suggestion:not(:first-child) {
+  border-top: 1px solid #ddd;
+}
+
+.react-autosuggest__suggestion--focused {
+  background-color: #0C7EAF;
+  color: #fff;
+}
+
+.highlight {
+  color: #ee0000;
+  font-weight: bold;
+}
+
+.react-autosuggest__suggestion--focused .highlight {
+  color: #120000;
+}
+
+.suggestion-hint {
+  margin-top: 0px;
+  padding-top: 0px;
+  font-style: italic;
+  font-size: smaller;
+}
+
+.checkin-container {
+  width: 500px;
+  margin: 80px auto;
+}
+
+.checkin-page-header {
+  width: 500px;
+  margin: 80px auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.checkin-form {
+  margin: 1px 10px;
+  padding: 10px;
+}
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
