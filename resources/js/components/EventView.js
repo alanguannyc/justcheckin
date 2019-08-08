@@ -22,7 +22,7 @@ export default class EventView extends Component{
           { title: 'Title', field: 'title' },
           { title: 'Email', field: 'email' },
           { title: 'Checked in', field: 'checkin',
-          render: rowData => {return rowData.checkin? <p>YES</p> : <p>NO</p>},
+          render: rowData => {return rowData.checkin? <div>YES</div> : <div>NO</div> },
           lookup: { 0: 'NO', 1: 'YES' }
           }, 
           { title: 'Date ', field: 'checkedin_at', type: 'date' },
@@ -110,6 +110,7 @@ export default class EventView extends Component{
             company : company,
             title : title,
             created_at: now,
+            checkin: false,
           }
           
           uploadsData.push(attendeeToUpload)
