@@ -143,6 +143,8 @@ class EventsDashboard extends Component {
             
                 { title: 'RSVP', field: 'attendees',
                 render: rowData => <div>{rowData.attendees.length}</div> },
+                { title: 'Checked In', field: 'attendees',
+                render: rowData => <div>{rowData.attendees.filter(attendee=>attendee.checkin).length}</div> },
 
               ]}
               data={this.state.data}
