@@ -46,7 +46,7 @@ import CheckinForm from './CheckinForm';
             })
           }
           
-          {suggestion.checkin ? <div className="suggestion-hint">{suggestion.title} at {suggestion.company} <div style={{'color':'green'}}>Already Checked in </div></div> : 
+          {suggestion.checkin == true ? <div className="suggestion-hint">{suggestion.title} at {suggestion.company} <div style={{'color':'green'}}>Already Checked in </div></div> : 
           <div className="suggestion-hint">{suggestion.title} at {suggestion.company} </div>}
           
         </span>

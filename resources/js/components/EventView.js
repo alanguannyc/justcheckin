@@ -22,7 +22,7 @@ export default class EventView extends Component{
           { title: 'Title', field: 'title' },
           { title: 'Email', field: 'email' },
           { title: 'Checked in', field: 'checkin',
-          render: rowData => {return rowData.checkin? <div>YES</div> : <div>NO</div> },
+          render: rowData => {return rowData.checkin == true ? <div>YES</div> : <div>NO</div> },
           lookup: { 0: 'NO', 1: 'YES' }
           }, 
           { title: 'Date ', field: 'checkedin_at', type: 'date' },
