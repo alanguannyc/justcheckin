@@ -11,14 +11,14 @@
     <title>{{ config('app.name', 'Just Check In') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js?v=1.08') }}" defer></script>
+    <script src="{{ asset('js/app.js?v=1.09') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css?v=1.02') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css?v=1.03') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">

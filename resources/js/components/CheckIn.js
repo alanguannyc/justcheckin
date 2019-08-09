@@ -231,9 +231,11 @@ import CheckinForm from './CheckinForm';
     
         return (
 
-            <Grid container >
-            <Grid item xs={12}>
+            <Grid container spacing={3}>
             <div className="checkin-container">
+            <Grid item xs={12}>
+
+            
             <h1 className="checkin-page-header">{this.state.event.name} Self CheckIn</h1>
 
             {
@@ -241,7 +243,8 @@ import CheckinForm from './CheckinForm';
                 :
                 <div></div>
             }
-
+            </Grid>
+            <Grid item xs={12}>
             <Snackbar
                 anchorOrigin={{
                 vertical: 'center',
@@ -257,8 +260,8 @@ import CheckinForm from './CheckinForm';
                 message="Thank you! You're all set! "
                 />
             </Snackbar>
-            
-
+            </Grid>
+            <Grid item xs={12}>
             <Autosuggest 
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -268,25 +271,32 @@ import CheckinForm from './CheckinForm';
                 onSuggestionSelected={this.onSuggestionSelected}
                 inputProps={inputProps} 
             />
-
+            </Grid>
+            <Grid item xs={12} >
             {this.state.showCheckinButton ? 
                 <div className="checkin-button" >
                 <Button variant="contained" color="primary" onClick={this.checkinButtonedn}>Check me in</Button>
                 </div>
                  : <div></div>}
+                 </Grid>
+                 
+                 <Grid item xs={12}>
             {this.state.showAddMoreButton ? 
                 <div className="checkin-button" >
                 <p>Cannot find your name? Add your name below</p>
                 <Button variant="contained" color="primary" onClick={this.addMore}>Add</Button>
                 </div>
                 : <div></div>}
-
+                </Grid>
+               
+                <Grid item xs={12}>   
             {this.state.addMore ? 
                 <CheckinForm eventID={this.props.match.params.id} showSuccess={this.showSuccessIndicator} />  : <div></div>
             }
-           
-            </div>
             </Grid>
+            
+
+            </div>
             </Grid>
         );
     }
