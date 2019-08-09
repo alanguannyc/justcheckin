@@ -37,7 +37,7 @@ $cyan: #6cb2eb;
     position: relative;
 
     margin:auto;
-    width: 440px;
+    max-width: 440px;
     // text-align: center;
   }
   
@@ -142,7 +142,7 @@ $cyan: #6cb2eb;
   }
 
   .checkin-page-header {
-    width: 500px;
+    max-width: 500px;
     margin: 80px auto;
     justify-content: center;
     text-align: center;

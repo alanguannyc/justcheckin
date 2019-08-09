@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText,
+import {Button, Paper, TextField, Dialog, DialogActions, DialogContent, DialogContentText,
 DialogTitle} from '@material-ui/core';
 import moment from 'moment';
 import Autosuggest from 'react-autosuggest';
@@ -230,6 +230,8 @@ import CheckinForm from './CheckinForm';
         };
     
         return (
+
+
             <div className="checkin-container">
             <h1 className="checkin-page-header">{this.state.event.name} Self CheckIn</h1>
 
@@ -281,9 +283,9 @@ import CheckinForm from './CheckinForm';
             {this.state.addMore ? 
                 <CheckinForm eventID={this.props.match.params.id} showSuccess={this.showSuccessIndicator} />  : <div></div>
             }
-                   
+           
             </div>
-          
+
         );
     }
   }
