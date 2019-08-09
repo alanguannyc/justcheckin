@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Just Check In') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js?v=1.07') }}" defer></script>
+    <script src="{{ asset('js/app.js?v=1.08') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
