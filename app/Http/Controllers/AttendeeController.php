@@ -39,6 +39,8 @@ class AttendeeController extends Controller
         $attendee = new Attendee(request(['firstName','lastName','company','title','phone','note','event_id', 'email','checkin','checkedin_at']));
 
         $attendee->save();
+
+	return response()->json(['success' => 'success'], 200);
     }
 
     /**
@@ -74,7 +76,8 @@ class AttendeeController extends Controller
     {
         $attendee = Attendee::findOrFail($id);
         $attendee->update($request->all());
-        return $attendee;
+        return response()->json(['success' => 'success'], 200);
+
     }
 
    
