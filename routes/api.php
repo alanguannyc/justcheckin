@@ -18,10 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['auth']], function(){
-    
-    
+
+
 
 });
+
+Route::post('/login', 'LoginController@authenticate');
 
 Route::get('/events', 'EventController@index');
 Route::post('/events', 'EventController@store');
