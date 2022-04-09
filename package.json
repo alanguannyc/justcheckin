@@ -32,7 +32,7 @@
         "history": "^4.9.0",
         "material-table": "^1.40.1",
         "material-ui-icons": "^1.0.0-beta.36",
-        "moment": "^2.24.0",
+        "moment": "^2.29.2",
         "papaparse": "^5.0.1",
         "react-autosuggest": "^9.4.3",
         "react-router-dom": "^5.0.1",
